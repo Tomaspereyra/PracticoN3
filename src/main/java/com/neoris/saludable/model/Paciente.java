@@ -6,13 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+
 @Entity
-public class Paciente {
+@Table(name="pacientes")
+public class Paciente{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
@@ -22,12 +23,46 @@ public class Paciente {
 	private Integer dni;
 	private String sexo;
 	private Date fechaDeNacimiento;
-	@ManyToOne
-	@JoinColumn(name = "localidad_id")
-	private Localidad localidad;
+	private String localidad;	
+	private String tipoTratamiento;
 	private String usuario;
 	private String contrasena;
-	private TipoTratamiento tipoTratamiento;
+	
+	
+	public Paciente() {
+		super();
+	}
+
+	public Paciente(String usuario, String contrasena, Integer id, String nombre, String apellido, Integer dni,
+			String sexo, Date fechaDeNacimiento, String localidad, String tipoTratamiento) {
+	
+		this.usuario= usuario;
+		this.contrasena= contrasena;
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.sexo = sexo;
+		this.fechaDeNacimiento = fechaDeNacimiento;
+		this.localidad = localidad;
+		this.tipoTratamiento = tipoTratamiento;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContrasena() {
+		return contrasena;
+	}
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
 
 	public Integer getId() {
 		return id;
@@ -77,36 +112,29 @@ public class Paciente {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
 
-	public Localidad getLocalidad() {
+	public String getLocalidad() {
 		return localidad;
 	}
 
-	public void setLocalidad(Localidad localidad) {
+	public void setLocalidad(String localidad) {
 		this.localidad = localidad;
 	}
 
-	public String getUsuario() {
-		return usuario;
-	}
+	
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getContrasena() {
-		return contrasena;
-	}
-
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
-
-	public TipoTratamiento getTipoTratamiento() {
+	public String getTipoTratamiento() {
 		return tipoTratamiento;
 	}
 
-	public void setTipoTratamiento(TipoTratamiento tipoTratamiento) {
+	public void setTipoTratamiento(String tipoTratamiento) {
 		this.tipoTratamiento = tipoTratamiento;
 	}
 
+	@Override
+	public String toString() {
+		return "Paciente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", sexo="
+				+ sexo + ", fechaDeNacimiento=" + fechaDeNacimiento + ", localidad=" + localidad + ", tipoTratamiento="
+				+ tipoTratamiento + ", usuario=" + usuario + ", contrasena=" + contrasena + "]";
+	}
+	
 }
